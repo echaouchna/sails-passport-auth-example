@@ -28,11 +28,13 @@ passport.use(new LocalStrategy({
           message: 'Unknown user ' + email
         });
       }
-      //   if (user.password != password) {
-      //     return done(null, false, {
-      //       message: 'Invalid password'
-      //     });
-      //   }
+      //*
+      if (user.password != password) {
+        return done(null, false, {
+          message: 'Invalid password'
+        });
+      }
+      /*/
       bcrypt.compare(password, user.password, function(err, res) {
         if (!res)
           return done(null, false, {
@@ -47,6 +49,7 @@ passport.use(new LocalStrategy({
           message: 'Logged In Successfully'
         });
       });
+      //*/
       return done(null, user);
     });
   }
